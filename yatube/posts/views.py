@@ -37,9 +37,10 @@ def profile(request, username):
     template = 'posts/profile.html'
     author = get_object_or_404(User, username=username)
     title = f'Профайл пользователя { author.get_full_name() }'
-    posts = Post.objects.select_related(
-                'author', 'group'
-    ).filter(author=author)
+    posts = (Post.objects
+                 .select_related('author', 'group')
+                 .filter(author=author)
+            )
     count = posts.count()
     page_obj = paginator(request, posts)
     if request.user.is_authenticated:
