@@ -39,13 +39,13 @@ def profile(request, username):
     title = f'Профайл пользователя { author.get_full_name() }'
     posts = Post.objects.select_related(
                 'author', 'group'
-            ).filter(author=author)
+    ).filter(author=author)
     count = posts.count()
     page_obj = paginator(request, posts)
     if request.user.is_authenticated:
         following = Follow.objects.filter(
                 user=request.user, author=author
-            ).exists()
+        ).exists()
     else:
         following = False
     if request.user == author:
@@ -56,7 +56,7 @@ def profile(request, username):
         'author': author,
         'title': title,
         'page_obj': page_obj,
-        'count': count,    
+        'count': count,
         'following': following,
         'user_not_author': user_not_author,
     }
