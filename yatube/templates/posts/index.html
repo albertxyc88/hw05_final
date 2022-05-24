@@ -5,9 +5,9 @@
   {{ title }}
 {% endblock %}
 {% block content %}
-  {% load cache %}
   {% include 'includes/switcher.html' %}
-  {% cache 20 index_page page_obj %}
+  {% load cache %}
+  {% cache 20 index_page %}
     {% for post in page_obj %}
       {% include 'includes/article.html' %}
       {% if not forloop.last %}
